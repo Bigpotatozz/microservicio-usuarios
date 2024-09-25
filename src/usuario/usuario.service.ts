@@ -69,15 +69,46 @@ export class UsuarioService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} usuario`;
+  async findOne(id: number) {
+    
+    try{
+      
+      const user = await this.usuario.findByPk(id);
+      return user;
+
+    }catch(error){
+      console.log(error);
+      return {message: 'Error al obtener el usuario'};
+    }
+    
   }
 
-  update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-    return `This action updates a #${id} usuario`;
+  async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
+    
+    try{
+
+      const user = await this.usuario.findByPk(id);
+      await user.update(updateUsuarioDto);
+
+      return {message: 'Usuario modificado correctamente'};
+
+    }catch(error){
+      console.log(error);
+      return {message: 'Error al modificar el usuario'};
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} usuario`;
+  async remove(id: number) {
+    try{
+
+      const user = await this.usuario.findByPk(id);
+      await user.update({estatus: false});
+      return {message: 'Usuario eliminado correctamente'};
+      
+
+    }catch(error){
+      console.log(error);
+      return {message: 'Error al eliminar el usuario'};
+    }
   }
 }

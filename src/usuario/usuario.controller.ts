@@ -46,18 +46,35 @@ export class UsuarioController {
   }
 
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usuarioService.findOne(+id);
+  @Get('/obtenerUsuario/:id')
+  async findOne(@Param('id') id: string) {
+
+    try{
+      return await this.usuarioService.findOne(+id);
+    }catch(error){ 
+      console.log(error);
+      return error;
+    }
+    
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usuarioService.update(+id, updateUsuarioDto);
+  @Put('/modificarUsuario/:id')
+  async update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+    try{
+      return await this.usuarioService.update(+id, updateUsuarioDto);
+    }catch(error){ 
+      console.log(error);
+      return error;
+    }
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usuarioService.remove(+id);
+  @Delete('/eliminarUsuario/:id')
+  async remove(@Param('id') id: string) {
+    try{
+      return await this.usuarioService.remove(+id);
+    }catch(error){ 
+      console.log(error);
+      return error;
+    }
   }
 }
