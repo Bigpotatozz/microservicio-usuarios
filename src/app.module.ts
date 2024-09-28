@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UsuarioModule } from './usuario/usuario.module';
 import { Usuario } from './usuario/entities/usuario.entity';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -20,7 +21,8 @@ import { Usuario } from './usuario/entities/usuario.entity';
       models: [Usuario]
   
     }),
-    UsuarioModule
+    UsuarioModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
