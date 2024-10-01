@@ -60,6 +60,16 @@ export class UsuarioController {
     
   }
 
+  @Get('/obtenerEstudiantes')
+  async obtenerEstudiantes() {
+    try{
+      return await this.usuarioService.findStudents();
+    }catch(error){ 
+      console.log(error);
+      return error;
+    }
+  }
+
   @Put('/modificarUsuario/:id')
   async update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     try{

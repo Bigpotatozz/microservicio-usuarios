@@ -50,6 +50,7 @@ export class UsuarioService {
 
   }
 
+
   async cambiarContrasenia(id: number, updateUsuarioDto: UpdateUsuarioDto) {
 
     try{
@@ -81,6 +82,22 @@ export class UsuarioService {
       return {message: 'Error al obtener el usuario'};
     }
     
+  }
+
+  async findStudents() {
+    try{
+
+      const students = await this.usuario.findAll({where: {rol: 'estudiante'}});
+      if(!students){
+        return {message: 'No hay estudiantes registrados'};
+      }
+
+      return students;
+
+    }catch(error){
+      console.log(error);
+      return error;
+    }
   }
 
   async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
