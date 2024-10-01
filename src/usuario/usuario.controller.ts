@@ -3,12 +3,14 @@ import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { jwtAuthGuard } from 'src/auth/auth.guard';
+import { correoGuard } from 'src/guards/correo.guard';
 
 @Controller('usuario')
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
   @Post('/crearUsuario')
+  @UseGuards(correoGuard)
   async create(@Body() createUsuarioDto: CreateUsuarioDto) {
     
     try{
@@ -71,6 +73,7 @@ export class UsuarioController {
   }
 
   @Put('/modificarUsuario/:id')
+  @UseGuards(correoGuard)
   async update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     try{
       return await this.usuarioService.update(+id, updateUsuarioDto);
